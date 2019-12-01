@@ -27,7 +27,7 @@ public class MailBoxTest {
 
 	Message message = messageQueue.nextMessage();
 	DeliveryOutcome actualDeliveryOutcome = mailBox.deliver(message);
-	DeliveryOutcomeImpl expectedDeliveryOutcome = new DeliveryOutcomeImpl(DeliveryOutcome.Recipient.SMS_NUMBER);
+	DeliveryOutcomeImpl expectedDeliveryOutcome = new DeliveryOutcomeImpl(DeliveryOutcome.Recipient.PHONE_NUMBER);
 	assertEquals(expectedDeliveryOutcome, actualDeliveryOutcome);
     }
 

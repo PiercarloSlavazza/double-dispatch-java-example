@@ -15,7 +15,7 @@ public class MailBoxWithDoubleDispatch implements MailBox, MessageVisitor<Delive
     }
 
     @Override public DeliveryOutcome visit(SMSMessage smsMessage) {
-	return new DeliveryOutcomeImpl(DeliveryOutcome.Recipient.SMS_NUMBER);
+	return new DeliveryOutcomeImpl(DeliveryOutcome.Recipient.PHONE_NUMBER);
     }
 
     @Override public DeliveryOutcome visit(EmailMessage emailMessage) {

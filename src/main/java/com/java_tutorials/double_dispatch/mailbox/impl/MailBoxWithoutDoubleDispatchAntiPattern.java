@@ -15,7 +15,7 @@ public class MailBoxWithoutDoubleDispatchAntiPattern implements MailBox {
     }
 
     private DeliveryOutcome deliver(SMSMessage smsMessage) {
-	return new DeliveryOutcomeImpl(DeliveryOutcome.Recipient.SMS_NUMBER);
+	return new DeliveryOutcomeImpl(DeliveryOutcome.Recipient.PHONE_NUMBER);
     }
 
     private DeliveryOutcome deliver(EmailMessage emailMessage) {
