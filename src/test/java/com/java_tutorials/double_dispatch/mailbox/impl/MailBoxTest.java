@@ -5,10 +5,7 @@ import com.java_tutorials.double_dispatch.mailbox.MailBox;
 import com.java_tutorials.double_dispatch.messages.FormattedText;
 import com.java_tutorials.double_dispatch.messages.Message;
 import com.java_tutorials.double_dispatch.messages.MessageId;
-import com.java_tutorials.double_dispatch.messages.impl.EmailAddress;
-import com.java_tutorials.double_dispatch.messages.impl.EmailMessage;
-import com.java_tutorials.double_dispatch.messages.impl.PhoneNumber;
-import com.java_tutorials.double_dispatch.messages.impl.SMSMessage;
+import com.java_tutorials.double_dispatch.messages.impl.*;
 import com.java_tutorials.double_dispatch.messages_queue.MessageQueue;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -24,7 +21,7 @@ public class MailBoxTest {
     MailBox mailBox;
 
     @Test
-    public void shouldDeliverSMSToAnSMSNumber() {
+    public void shouldDeliverSMSToSMSNumber() {
 
 	when(messageQueue.nextMessage()).thenReturn(new SMSMessage(mock(MessageId.class), mock(FormattedText.class), mock(PhoneNumber.class)));
 
@@ -35,13 +32,24 @@ public class MailBoxTest {
     }
 
     @Test
-    public void shouldDeliverEmailToAnEmailAddress() {
+    public void shouldDeliverEmailToEmailAddress() {
 
 	when(messageQueue.nextMessage()).thenReturn(new EmailMessage(mock(MessageId.class), mock(FormattedText.class), mock(EmailAddress.class)));
 
 	Message message = messageQueue.nextMessage();
 	DeliveryOutcome actualDeliveryOutcome = mailBox.deliver(message);
 	DeliveryOutcomeImpl expectedDeliveryOutcome = new DeliveryOutcomeImpl(DeliveryOutcome.Recipient.EMAIL_ADDRESS);
+	assertEquals(expectedDeliveryOutcome, actualDeliveryOutcome);
+    }
+
+    @Test
+    public void shouldDeliverPushNotificationToMobileDevice() {
+
+	when(messageQueue.nextMessage()).thenReturn(new MobilePushNotification(mock(MessageId.class), mock(FormattedText.class), mock(MobileDeviceId.class)));
+
+	Message message = messageQueue.nextMessage();
+	DeliveryOutcome actualDeliveryOutcome = mailBox.deliver(message);
+	DeliveryOutcomeImpl expectedDeliveryOutcome = new DeliveryOutcomeImpl(DeliveryOutcome.Recipient.MOBILE_DEVICE);
 	assertEquals(expectedDeliveryOutcome, actualDeliveryOutcome);
     }
 
