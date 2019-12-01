@@ -5,6 +5,7 @@ import com.java_tutorials.double_dispatch.mailbox.MailBox;
 import com.java_tutorials.double_dispatch.messages.Message;
 import com.java_tutorials.double_dispatch.messages.MessageVisitor;
 import com.java_tutorials.double_dispatch.messages.impl.EmailMessage;
+import com.java_tutorials.double_dispatch.messages.impl.MobilePushNotification;
 import com.java_tutorials.double_dispatch.messages.impl.SMSMessage;
 
 public class MailBoxWithDoubleDispatch implements MailBox, MessageVisitor<DeliveryOutcome> {
@@ -19,5 +20,9 @@ public class MailBoxWithDoubleDispatch implements MailBox, MessageVisitor<Delive
 
     @Override public DeliveryOutcome visit(EmailMessage emailMessage) {
 	return new DeliveryOutcomeImpl(DeliveryOutcome.Recipient.EMAIL_ADDRESS);
+    }
+
+    @Override public DeliveryOutcome visit(MobilePushNotification mobilePushNotification) {
+	return new DeliveryOutcomeImpl(DeliveryOutcome.Recipient.MOBILE_DEVICE);
     }
 }
