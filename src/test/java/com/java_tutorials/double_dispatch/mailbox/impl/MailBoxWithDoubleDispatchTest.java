@@ -12,6 +12,6 @@ public class MailBoxWithDoubleDispatchTest extends MailBoxTest {
     @Before
     public void setUp() {
         messageQueue = mock(MessageQueue.class);
-        mailBox = new MailBoxWithoutDoubleDispatchAntiPattern();
+        mailBox = new MailBoxWithDoubleDispatch();
     }
 }
