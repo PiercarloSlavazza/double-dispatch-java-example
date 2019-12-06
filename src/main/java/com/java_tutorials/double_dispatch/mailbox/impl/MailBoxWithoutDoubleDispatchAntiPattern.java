@@ -22,7 +22,7 @@ import com.java_tutorials.double_dispatch.messages.Message;
 import com.java_tutorials.double_dispatch.messages.impl.EmailMessage;
 import com.java_tutorials.double_dispatch.messages.impl.SMSMessage;
 
-public class MailBoxWithoutDoubleDispatchAntiPattern implements MailBox {
+@SuppressWarnings({ "WeakerAccess", "unused" }) public class MailBoxWithoutDoubleDispatchAntiPattern implements MailBox {
 
     @Override public DeliveryOutcome deliver(Message message) {
         if (message instanceof SMSMessage) return deliver((SMSMessage)message);
@@ -30,11 +30,11 @@ public class MailBoxWithoutDoubleDispatchAntiPattern implements MailBox {
 	throw new RuntimeException("unknown message type|" + message.getClass().getName());
     }
 
-    private DeliveryOutcome deliver(SMSMessage smsMessage) {
+    public DeliveryOutcome deliver(SMSMessage smsMessage) {
 	return new DeliveryOutcomeImpl(DeliveryOutcome.Recipient.PHONE_NUMBER);
     }
 
-    private DeliveryOutcome deliver(EmailMessage emailMessage) {
+    public DeliveryOutcome deliver(EmailMessage emailMessage) {
 	return new DeliveryOutcomeImpl(DeliveryOutcome.Recipient.EMAIL_ADDRESS);
     }
 }

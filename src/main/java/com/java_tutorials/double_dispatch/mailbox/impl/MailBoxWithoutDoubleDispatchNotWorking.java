@@ -22,17 +22,17 @@ import com.java_tutorials.double_dispatch.messages.Message;
 import com.java_tutorials.double_dispatch.messages.impl.EmailMessage;
 import com.java_tutorials.double_dispatch.messages.impl.SMSMessage;
 
-public class MailBoxWithoutDoubleDispatchNotWorking implements MailBox {
+@SuppressWarnings("unused") public class MailBoxWithoutDoubleDispatchNotWorking implements MailBox {
 
     @Override public DeliveryOutcome deliver(Message message) {
 	return null;
     }
 
-    private DeliveryOutcome deliver(SMSMessage smsMessage) {
+    public DeliveryOutcome deliver(SMSMessage smsMessage) {
 	return new DeliveryOutcomeImpl(DeliveryOutcome.Recipient.PHONE_NUMBER);
     }
 
-    private DeliveryOutcome deliver(EmailMessage emailMessage) {
+    public DeliveryOutcome deliver(EmailMessage emailMessage) {
 	return new DeliveryOutcomeImpl(DeliveryOutcome.Recipient.EMAIL_ADDRESS);
     }
 }
