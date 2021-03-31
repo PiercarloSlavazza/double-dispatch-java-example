@@ -24,21 +24,10 @@ import com.java_tutorials.double_dispatch.messages.impl.EmailMessage;
 import com.java_tutorials.double_dispatch.messages.impl.MobilePushNotification;
 import com.java_tutorials.double_dispatch.messages.impl.SMSMessage;
 
-public class MailBoxWithDoubleDispatch implements MailBox, MessageVisitor<DeliveryOutcome> {
+public class MailBoxWithDoubleDispatch implements MailBox {
 
     @Override public DeliveryOutcome deliver(Message message) {
-	return message.accept(this);
+	throw new RuntimeException("Your kata starts here!");
     }
 
-    @Override public DeliveryOutcome visit(SMSMessage smsMessage) {
-	return new DeliveryOutcomeImpl(DeliveryOutcome.Recipient.PHONE_NUMBER);
-    }
-
-    @Override public DeliveryOutcome visit(EmailMessage emailMessage) {
-	return new DeliveryOutcomeImpl(DeliveryOutcome.Recipient.EMAIL_ADDRESS);
-    }
-
-    @Override public DeliveryOutcome visit(MobilePushNotification mobilePushNotification) {
-	return new DeliveryOutcomeImpl(DeliveryOutcome.Recipient.MOBILE_DEVICE);
-    }
 }

@@ -19,7 +19,6 @@ package com.java_tutorials.double_dispatch.messages.impl;
 import com.java_tutorials.double_dispatch.messages.FormattedText;
 import com.java_tutorials.double_dispatch.messages.Message;
 import com.java_tutorials.double_dispatch.messages.MessageId;
-import com.java_tutorials.double_dispatch.messages.MessageVisitor;
 
 import java.util.Objects;
 
@@ -45,10 +44,6 @@ public class SMSMessage implements Message {
 
     @Override public MessageId getMessageId() {
 	return null;
-    }
-
-    @Override public <T> T accept(MessageVisitor<T> visitor) {
-	return visitor.visit(this);
     }
 
     @Override public String toString() {
