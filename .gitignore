@@ -3,3 +3,5 @@
 /target
 /dependency-reduced-pom.xml
 /log.txt
+/double-dispatch-java-example.iml
+.DS_Store
